@@ -9,7 +9,6 @@
     <script>
         function getPlatform() {
             var platform = navigator.platform.toLowerCase();
-            return platform;
 
             if (platform.indexOf('win') !== -1) {
                 return 'windows';
@@ -37,6 +36,8 @@
                 if (window.location.href.indexOf(deepLink) !== -1) {
                     console.log('Deep link підтримується');
                 } else {
+                    linkElement.innerHTML = getPlatform();
+                    document.body.appendChild(linkElement);
                     if (getPlatform() == 'ios') {
                         linkElement.href = 'https://apps.apple.com/app/wishlist-gift-list-listery/id1537225707';
                         linkElement.click();
