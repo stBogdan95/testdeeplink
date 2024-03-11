@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test deep link</title>
+</head>
+
+<body>
+    <script>
+        function getPlatform() {
+            var platform = navigator.platform.toLowerCase();
+            return platform;
+
+            if (platform.indexOf('win') !== -1) {
+                return 'windows';
+            } else if (platform.indexOf('mac') !== -1) {
+                return 'mac';
+            } else if (platform.indexOf('linux') !== -1) {
+                return 'linux';
+            } else if (platform.indexOf('iphone') !== -1 || platform.indexOf('ipad') !== -1) {
+                return 'ios';
+            } else if (platform.indexOf('android') !== -1) {
+                return 'android';
+            } else {
+                return 'Unknown';
+            }
+        }
+
+        console.log('Платформа: ' + getPlatform());
+
+        function isDeepLinkSupported(deepLink) {
+
+            var linkElement = document.createElement('a');
+            linkElement.href = deepLink;
+            linkElement.click();
+            setTimeout(function () {
+                if (window.location.href.indexOf(deepLink) !== -1) {
+                    console.log('Deep link підтримується');
+                } else {
+                    if (getPlatform() == 'ios') {
+                        linkElement.href = 'https://apps.apple.com/app/wishlist-gift-list-listery/id1537225707';
+                        linkElement.click();
+                    }
+                    else if (getPlatform() = 'android') {
+
+                        linkElement.href == 'https://play.google.com/store/apps/details?id=com.listery.app';
+                        linkElement.click();
+                    } else {
+                        linkElement.href = 'https://listery.app/ru/wishlist/?d=65e5b6955796520012bb4048';
+                        linkElement.click();
+                    }
+                    console.log('Deep link не підтримується');
+                }
+            }, 750);
+        }
+
+        isDeepLinkSupported('listery://open/');
+    </script>
+</body>
+
+</html>
