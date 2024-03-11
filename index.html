@@ -9,6 +9,9 @@
     <script>
         function getPlatform() {
             var platform = navigator.platform.toLowerCase();
+            if (/Android/i.test(navigator.userAgent)) {
+                return 'android';
+            }
 
             if (platform.indexOf('win') !== -1) {
                 return 'windows';
